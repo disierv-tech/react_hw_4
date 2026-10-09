@@ -1,23 +1,25 @@
-import React, { useState } from "react";
+import React from "react";
 
-const ToDoList = (props) => {
-  const handleDelete = (id) => {
-    props.deleteTodo(id);
-  };
-
-  return (
-    <>
+class ToDoList extends React.Component {
+  render() {
+    return (
       <ul>
-        {props.toDos.map((todo) => (
-          <li key={todo.id}>
-            {todo.name}{" "}
-            <button onClick={() => handleDelete(todo.id)}>Видалити</button>
+        {this.props.todos.map((todo) => (
+          <li key={todo.id} id={todo.id}>
+            <div className="row">
+              <p>{todo.name}</p>
+              <button
+                className="delete-button"
+                onClick={() => this.props.onDelete(todo.id)}
+              >
+                Видалити
+              </button>
+            </div>
           </li>
         ))}
       </ul>
-      <p>Кількість: {props.toDos.length}</p>
-    </>
-  );
-};
+    );
+  }
+}
 
 export default ToDoList;
